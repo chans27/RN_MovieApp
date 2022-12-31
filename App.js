@@ -8,20 +8,25 @@ import {NavigationContainer, DarkTheme, DefaultTheme} from "@react-navigation/na
 import Tabs from "./navigation/Tabs";
 import Stack from "./navigation/Stack";
 import Root from "./navigation/Root";
+import {ThemeProvider} from "styled-components/native";
+import {darkTheme, lightTheme} from "./styled";
 
 export default function App() {
   const [assets] = useAssets([require('./robot.jpeg')])
   const [fonts] = Font.useFonts(Ionicons.font);
 
+  const isDark = useColorScheme() === "dark";
   if (!assets || !fonts) {
     return (
         <AppLoading/>
     );
   }
   return (
-    <NavigationContainer>
-      <Root />
-    </NavigationContainer>
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        <NavigationContainer>
+          <Root />
+        </NavigationContainer>
+      </ThemeProvider>
   );
 }
 
