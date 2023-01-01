@@ -13,7 +13,10 @@ const Tab = createBottomTabNavigator();
 const Tabs = () => {
   const isDark = useColorScheme() === "dark";
   return(
-    <Tab.Navigator screenOptions={{
+    <Tab.Navigator sceneContainerStyle={{
+      backgroundColor: isDark ? colors.dark_blue : colors.sky_blue
+    }}
+        screenOptions={{
       tabBarActiveTintColor: isDark ? "coral" : colors.gray,
       tabBarStyle: {
         backgroundColor: isDark ? colors.dark_blue : colors.sky_blue
