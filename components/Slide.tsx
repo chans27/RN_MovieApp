@@ -21,6 +21,7 @@ const Wrapper = styled.View`
 `;
 const Column = styled.View`
     width: 40%;
+    margin-left: 30px;
 `;
 const Overview = styled.Text`
     margin-top: 10px;
