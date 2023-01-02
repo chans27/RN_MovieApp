@@ -5,7 +5,6 @@ import Votes from "./Votes";
 
 const HMovie = styled.View`
   padding: 0px 30px;
-  margin-bottom: 30px;
   flex-direction: row;
 `;
 
@@ -43,18 +42,18 @@ interface HMediaProps {
 }
 
 const HMedia: React.FC<HMediaProps> = ({
-                                         posterPath,
-                                         originalTitle,
-                                         overview,
-                                         releaseDate,
-                                         voteAverage,
-                                       }) => {
+     posterPath,
+     originalTitle,
+     overview,
+     releaseDate,
+     voteAverage,
+   }) => {
   return (
     <HMovie>
       <Poster path={posterPath} />
       <HColumn>
         <Title>
-          {originalTitle.length > 30
+          {originalTitle && originalTitle.length > 30
             ? `${originalTitle.slice(0, 30)}...`
             : originalTitle}
         </Title>
@@ -69,7 +68,7 @@ const HMedia: React.FC<HMediaProps> = ({
         ) : null}
         {voteAverage ? <Votes votes={voteAverage} /> : null}
         <Overview>
-          {overview !== "" && overview.length > 140
+          {overview !== "" &&  overview.length > 140
             ? `${overview.slice(0, 140)}...`
             : overview}
         </Overview>
