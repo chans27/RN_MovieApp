@@ -5,8 +5,8 @@ import {makeImgPath} from "../utils";
 const Image = styled.Image`
   width: 100px;
   height: 160px;
-    border-radius: 5px;
-  margin-right: 20px;
+  border-radius: 5px;
+  background-color: red;
 `;
 
 interface PosterProps {
