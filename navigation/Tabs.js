@@ -17,6 +17,7 @@ const Tabs = () => {
       backgroundColor: isDark ? colors.dark_blue : colors.sky_blue
     }}
         screenOptions={{
+          unmountOnBlur: true,
       tabBarActiveTintColor: isDark ? "coral" : colors.gray,
       tabBarStyle: {
         backgroundColor: isDark ? colors.dark_blue : colors.sky_blue
