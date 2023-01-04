@@ -6,34 +6,34 @@ import Movies from "../screens/Movies";
 import {useColorScheme} from 'react-native';
 import colors from "../colors";
 import { Ionicons } from "@expo/vector-icons";
-import Stack from "./Stack";
 
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
   const isDark = useColorScheme() === "dark";
   return(
-    <Tab.Navigator sceneContainerStyle={{
+    <Tab.Navigator
+      sceneContainerStyle={{
       backgroundColor: isDark ? colors.dark_blue : colors.sky_blue
     }}
-        screenOptions={{
-          unmountOnBlur: true,
-      tabBarActiveTintColor: isDark ? "coral" : colors.gray,
-      tabBarStyle: {
-        backgroundColor: isDark ? colors.dark_blue : colors.sky_blue
-      },
-      tabBarInactiveTintColor: isDark ? "white" : colors.black,
-      headerStyle : {
-        backgroundColor: isDark ? colors.dark_blue : colors.sky_blue,
-      },
-      headerTitleStyle : {
-        color : isDark ? "white" : "black"
-      },
-      tabBarLabelStyle: {
-        fontSize: 13,
-        fontWeight: "500",
-        marginTop : "-5%",
-      },
+      screenOptions={{
+        unmountOnBlur: true,
+        tabBarActiveTintColor: isDark ? "coral" : colors.gray,
+        tabBarStyle: {
+          backgroundColor: isDark ? colors.dark_blue : colors.sky_blue
+        },
+        tabBarInactiveTintColor: isDark ? "white" : colors.black,
+        headerStyle : {
+          backgroundColor: isDark ? colors.dark_blue : colors.sky_blue,
+        },
+        headerTitleStyle : {
+          color : isDark ? "white" : "black"
+        },
+        tabBarLabelStyle: {
+          fontSize: 13,
+          fontWeight: "500",
+          marginTop : "-5%",
+        },
     }}>
       <Tab.Screen
         name="Movies"
@@ -56,7 +56,6 @@ const Tabs = () => {
           component={Search}
           options={{
             tabBarIcon : ({focused, color, size}) => {
-              console.log(focused, color, size)
               return <Ionicons name={focused ? "search" : "search-circle"} color={color} size={size} />
           }}}
       />
