@@ -1,5 +1,5 @@
 import React from "react";
-import {ActivityIndicator} from "react-native";
+import { ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
 
 const Wrapper = styled.View`
@@ -12,6 +12,6 @@ const Loader = () => (
   <Wrapper>
     <ActivityIndicator />
   </Wrapper>
-)
+);
 
 export default Loader;

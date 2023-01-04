@@ -21,10 +21,10 @@ interface VMediaProps {
 }
 
 export const VMedia: React.FC<VMediaProps> = ({
-     posterPath,
-     originalTitle,
-     voteAverage,
-     }) => (
+  posterPath,
+  originalTitle,
+  voteAverage,
+}) => (
   <Movie>
     <Poster path={posterPath} />
     <Title>
