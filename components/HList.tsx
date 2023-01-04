@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import VMedia from "./Vmedia";
 import {FlatList} from "react-native";
+import {Movie, TV} from "../api";
 
 const ListContainer = styled.View`
   margin-bottom: 30px;
@@ -20,8 +21,8 @@ export const HListSeparator = styled.View`
 `
 
 interface HListProps {
-  title: string,
-  data: any[], // check in github and modify if you want
+  title: string;
+  data: any;
 }
 
 
