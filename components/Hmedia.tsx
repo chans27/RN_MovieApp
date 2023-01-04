@@ -42,12 +42,12 @@ interface HMediaProps {
 }
 
 const HMedia: React.FC<HMediaProps> = ({
-     posterPath,
-     originalTitle,
-     overview,
-     releaseDate,
-     voteAverage,
-   }) => {
+  posterPath,
+  originalTitle,
+  overview,
+  releaseDate,
+  voteAverage,
+}) => {
   return (
     <HMovie>
       <Poster path={posterPath} />
@@ -68,7 +68,7 @@ const HMedia: React.FC<HMediaProps> = ({
         ) : null}
         {voteAverage ? <Votes votes={voteAverage} /> : null}
         <Overview>
-          {overview !== "" &&  overview.length > 140
+          {overview !== "" && overview.length > 140
             ? `${overview.slice(0, 140)}...`
             : overview}
         </Overview>
