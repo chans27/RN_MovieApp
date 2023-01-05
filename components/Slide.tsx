@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components/native";
-import { StyleSheet, useColorScheme, View } from "react-native";
+import {StyleSheet, TouchableOpacity, TouchableWithoutFeedback, useColorScheme, View} from "react-native";
 import { makeImgPath } from "../utils";
 import { BlurView } from "expo-blur";
 import Poster from "./Poster";
+import {useNavigation} from "@react-navigation/native";
 
 const BgImg = styled.Image``;
 
@@ -48,7 +49,12 @@ const Slide: React.FC<SlideProps> = ({
   overview,
 }) => {
   const isDark = useColorScheme() === "dark";
+  const navigation = useNavigation();
+  const goToDetail = () => {
+    navigation.navigate("Stack", {screen: "Detail"})
+  }
   return (
+    <TouchableWithoutFeedback onPress={goToDetail}>
     <View style={{ flex: 1 }}>
       <BgImg
         style={StyleSheet.absoluteFill}
@@ -69,6 +75,7 @@ const Slide: React.FC<SlideProps> = ({
         </Wrapper>
       </BlurView>
     </View>
+    </TouchableWithoutFeedback>
   );
 };
 

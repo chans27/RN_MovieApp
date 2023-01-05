@@ -3,6 +3,8 @@ import { View, Text } from "react-native";
 import styled from "styled-components/native";
 import {useQuery} from "react-query";
 import {moviesApi, tvApi} from "../api";
+import Loader from "../components/Loader";
+import HList from "../components/HList";
 
 const Container = styled.ScrollView`
 `;
@@ -49,6 +51,9 @@ const Search = () => {
         onChangeText={onChangeText}
         onSubmitEditing={onSubmit}
       />
+      {moviesLoading || tvLoading ? <Loader /> : null}
+      {moviesData ? <HList title="Movie Results" data={moviesData.results} /> : null}
+      {tvData ? <HList title="TV Results" data={tvData.results} /> : null}
     </Container>
   )
 }
