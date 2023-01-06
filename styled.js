@@ -4,7 +4,7 @@ export const lightTheme = {
   accentColor: "yellow",
 };
 export const darkTheme = {
-  mainBgColor: "1e272e",
-  textColor: "#2f3542",
+  mainBgColor: "#1e272e",
+  textColor: "#d2dae2",
   accentColor: "yellow",
 };
