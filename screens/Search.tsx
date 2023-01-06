@@ -17,6 +17,8 @@ const SearchBar = styled.TextInput`
   margin: 10px auto;
 `
 
+
+
 const Search = () => {
   const [query, setQuery] = useState("");
   const {
