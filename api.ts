@@ -127,13 +127,12 @@ export interface MovieResponse extends BaseResponse {
 //function that in Official docs is not clean, so refactoring fetch function in this file.
 
 export const moviesApi = {
-  trending: () =>
-    fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`).then((res) =>
-      res.json()
-    ),
-  upcoming: ({pageParams}) =>
+  trending: ({ pageParam }) =>
+    fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}&page=${typeof pageParam !== "number" ? "1" : pageParam}`
+    ).then((res) => res.json()),
+  upcoming: ({ pageParam }) =>
     fetch(
-      `${BASE_URL}/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${pageParams}`
+      `${BASE_URL}/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${pageParam}`
     ).then((res) => res.json()),
   nowPlaying: () =>
     fetch(

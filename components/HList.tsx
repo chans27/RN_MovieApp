@@ -22,30 +22,45 @@ export const HListSeparator = styled.View`
 interface HListProps {
   title: string;
   data: any;
+  hasNextPage: any;
+  fetchNextPage: any;
 }
 
-const HList: React.FC<HListProps> = ({ title, data }) => (
+const HList: React.FC<HListProps> = ({ title, data, hasNextPage, fetchNextPage }) => {
+  const loadMores = () => {
+    if(hasNextPage) {
+      fetchNextPage();
+    }
+  }
+
+    // console.log("checkTrendingData!!", data?.pages[1]?.results);
+
+  return (
   <ListContainer>
     <ListTitle>{title}</ListTitle>
     <FlatList
+      onEndReached={loadMores}
+      onEndReachedThreshold={0.4}
+      // data={data?.map((page) => page?.results).flat()}
       data={data}
       horizontal
       showsHorizontalScrollIndicator={false}
       ItemSeparatorComponent={HListSeparator}
       contentContainerStyle={{ paddingHorizontal: 30 }}
-      keyExtractor={(item) => item.id + ""}
+      keyExtractor={(item) => item?.id + ""}
       renderItem={({ item }) => (
         <VMedia
-          posterPath={item.poster_path || ""}
+          posterPath={item?.poster_path || ""}
           originalTitle={
-            item.original_title ? item.original_title : item.original_title
+            item?.original_title ? item?.original_title : item?.original_title
           }
-          voteAverage={item.vote_average}
+          voteAverage={item?.vote_average}
           fullData={item}
         />
       )}
     />
   </ListContainer>
-);
+  )
+};
 
 export default HList;
