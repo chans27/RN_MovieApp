@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from "react-native-screens/native-stack";
 import React, {useState} from "react";
-import {ActivityIndicator, Alert, Dimensions, FlatList} from "react-native";
+import {Dimensions, FlatList} from "react-native";
 import Swiper from "react-native-swiper";
 import styled from "styled-components/native";
 import HMedia from "../components/Hmedia";
@@ -41,30 +41,52 @@ const HSeparator = styled.View`
 const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
   const queryClient = useQueryClient();
   const [refreshing, setRefreshing] = useState(false);
-
+  //first
   const {
     isLoading: nowPlayingLoading,
     data: nowPlayingData,
   } = useQuery<MovieResponse>(["movies", "nowPlaying"], moviesApi.nowPlaying);
+
+  //second
+  const {
+    isLoading: trendingLoading,
+    data: trendingData,
+    hasNextPage: trendingHasNextPage,
+    fetchNextPage: trendingFetchNextPage,
+  } = useInfiniteQuery<MovieResponse>(
+    ["movies", "trending"],
+    moviesApi.trending,
+    {
+      getNextPageParam: (currentPage) => {
+        console.log("trend totals!@", currentPage);
+        const nextPage = currentPage.page + 1;
+        return nextPage > currentPage.total_pages ? null : nextPage;
+      },
+    });
+
+  // third
   const {
     isLoading: upcomingLoading,
     data: upcomingData,
-    hasNextPage,
-    fetchNextPage,
+    hasNextPage: upcomingHasNextPage,
+    fetchNextPage: upcomingFetchNextPage,
   } = useInfiniteQuery<MovieResponse>(
     ["movies", "upcoming"],
     moviesApi.upcoming,
     {
       getNextPageParam: (currentPage) => {
+        // console.log("upcoming totals", currentPage.page);
         const nextPage = currentPage.page + 1;
         return nextPage > currentPage.total_pages ? null : nextPage;
       },
     });
-  console.log(upcomingData);
-  const {
-    isLoading: trendingLoading,
-    data: trendingData,
-  } = useQuery<MovieResponse>(["movies", "trending"], moviesApi.trending);
+
+
+
+  console.log("trends", trendingData);
+  // data={upcomingData.pages.map((page) => page?.results).flat()} // third
+  // console.log("trendingData", trendingData?.pages.map((page) => page?.results).flat());
+  // console.log("upcomingData!@", upcomingData?.pages.map((page) => page?.results).flat());
 
   const onRefresh = async () => {
     setRefreshing(true)
@@ -74,8 +96,8 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
 
   const loading = nowPlayingLoading || upcomingLoading || trendingLoading;
   const loadMore = () => {
-    if (hasNextPage) {
-      fetchNextPage();
+    if (upcomingHasNextPage) {
+      upcomingFetchNextPage();
     }
   }
   return loading ? (
@@ -113,12 +135,12 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
             ))}
           </Swiper>
           {trendingData ? (
-            <HList title="Trending Movies" data={trendingData.results} />
+            <HList title="Trending Movies" data={trendingData.pages.map((page) => page?.results).flat()} hasNextPage={trendingHasNextPage} fetchNextPage={trendingFetchNextPage} />
           ) : null}
           <ComingSoonTitle>Coming Soon</ComingSoonTitle>
         </>
       }
-      data={upcomingData.pages.map((page) => page?.results).flat()}
+      data={upcomingData.pages.map((page) => page?.results).flat()} // third
       keyExtractor={(item) => item.id + ""}
       ItemSeparatorComponent={HSeparator}
       renderItem={({ item }) => (
@@ -135,3 +157,5 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
 };
 
 export default Movies;
+
+// https://api.themoviedb.org/3/trending/movie/week?api_key=6195530f152e74229396cafd68b78347&pages=3
