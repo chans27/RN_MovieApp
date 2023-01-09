@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import {StyleSheet, TouchableOpacity, TouchableWithoutFeedback, useColorScheme, View} from "react-native";
+import {StyleSheet, TouchableWithoutFeedback, useColorScheme, View} from "react-native";
 import { makeImgPath } from "../utils";
 import { BlurView } from "expo-blur";
 import Poster from "./Poster";

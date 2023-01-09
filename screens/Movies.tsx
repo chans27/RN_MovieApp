@@ -75,7 +75,6 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
     moviesApi.upcoming,
     {
       getNextPageParam: (currentPage) => {
-        // console.log("upcoming totals", currentPage.page);
         const nextPage = currentPage.page + 1;
         return nextPage > currentPage.total_pages ? null : nextPage;
       },
@@ -84,9 +83,6 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
 
 
   console.log("trends", trendingData);
-  // data={upcomingData.pages.map((page) => page?.results).flat()} // third
-  // console.log("trendingData", trendingData?.pages.map((page) => page?.results).flat());
-  // console.log("upcomingData!@", upcomingData?.pages.map((page) => page?.results).flat());
 
   const onRefresh = async () => {
     setRefreshing(true)
@@ -135,7 +131,7 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
             ))}
           </Swiper>
           {trendingData ? (
-            <HList title="Trending Movies" data={trendingData.pages.map((page) => page?.results).flat()} hasNextPage={trendingHasNextPage} fetchNextPage={trendingFetchNextPage} />
+            <HList title="Trending Movie" data={trendingData.pages.map((page) => page?.results).flat()} hasNextPage={trendingHasNextPage} fetchNextPage={trendingFetchNextPage} />
           ) : null}
           <ComingSoonTitle>Coming Soon</ComingSoonTitle>
         </>
