@@ -127,10 +127,10 @@ export interface MovieResponse extends BaseResponse {
 //function that in Official docs is not clean, so refactoring fetch function in this file.
 
 export const moviesApi = {
-  trending: ({ pageParam }) =>
-    fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}&page=${typeof pageParam !== "number" ? "1" : pageParam}`
+  trending: ({ pageParam }:any) =>
+    fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}&page=${pageParam ?? 1}`
     ).then((res) => res.json()),
-  upcoming: ({ pageParam }) =>
+  upcoming: ({ pageParam }:any) =>
     fetch(
       `${BASE_URL}/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${pageParam}`
     ).then((res) => res.json()),
@@ -138,13 +138,13 @@ export const moviesApi = {
     fetch(
       `${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1&region=KR&page=1`
     ).then((res) => res.json()),
-  search: ({ queryKey }) => {
+  search: ({ queryKey }:any) => {
     const [_, query] = queryKey;
     return fetch(
       `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=1&query=${query}`
     ).then((res) => res.json());
   },
-  detail: ({ queryKey }) => {
+  detail: ({ queryKey }:any) => {
     const [_, id] = queryKey;
     return fetch(
       `${BASE_URL}/movie/${id}?api_key=${API_KEY}&append_to_response=videos`
@@ -165,13 +165,13 @@ export const tvApi = {
     fetch(`${BASE_URL}/tv/top_rated?api_key=${API_KEY}`).then((res) =>
       res.json()
     ),
-  search: ({ queryKey }) => {
+  search: ({ queryKey }: any) => {
     const [_, query] = queryKey;
     return fetch(
       `${BASE_URL}/search/tv?api_key=${API_KEY}&language=en-US&page=1&query=${query}`
     ).then((res) => res.json());
   },
-  detail: ({ queryKey }) => {
+  detail: ({ queryKey }: any) => {
     const [_, id] = queryKey;
     return fetch(
       `${BASE_URL}/tv/${id}?api_key=${API_KEY}&append_to_response=videos`

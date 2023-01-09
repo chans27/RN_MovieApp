@@ -32,16 +32,12 @@ const HList: React.FC<HListProps> = ({ title, data, hasNextPage, fetchNextPage }
       fetchNextPage();
     }
   }
-
-    // console.log("checkTrendingData!!", data?.pages[1]?.results);
-
   return (
   <ListContainer>
     <ListTitle>{title}</ListTitle>
     <FlatList
       onEndReached={loadMores}
       onEndReachedThreshold={0.4}
-      // data={data?.map((page) => page?.results).flat()}
       data={data}
       horizontal
       showsHorizontalScrollIndicator={false}
